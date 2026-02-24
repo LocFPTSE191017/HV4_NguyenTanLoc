@@ -1,6 +1,6 @@
 const numOfPuschar = 5;
 let total = 0 ;
-for( let i = 0 ; i < 5 ; i ++){
+for( let i = 0 ; i < numOfPuschar ; i ++){
     let discount = Math.round(Math.random()*1);
     if(discount === 1){
        let discountPercent = Math.round(Math.random()*50);
