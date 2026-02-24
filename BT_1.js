@@ -1,6 +1,7 @@
-let time = 10;
+let time = 41;
+const hafltime = parseInt(time/2);
 while(time >0){
-    if(time === 5){
+    if(time === hafltime){
         console.log("Da qua nua thoi gian");
     } else{
         console.log("con lai :" + time + "giay")
