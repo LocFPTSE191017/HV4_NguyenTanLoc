@@ -1,4 +1,4 @@
-const tinh = ["dong_thap", "cao_bang", "ha_giang", "lao_cai", "son_la", "yen_bai"];
+const tinh = ["Dồng", "Cao Bằng", "Hà Giang", "Lào Cai", "Sơn La", "Yên Bái"];
 tinh.forEach((tinh) => {
     console.log(tinh);
 });
