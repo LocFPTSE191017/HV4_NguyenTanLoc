@@ -3,7 +3,7 @@ const employess = [{
     name: "Thịnh",
     age: 30,
     department: "Engineering",
-    phonenumber: "123-456-7890",    
+  
 } ,
 {    id: "2",
     name: "Hùng",
@@ -18,5 +18,9 @@ const employess = [{
     email: " Lan@gmail.com",
 }
 ]
-const updatedEmployess = employess.filter(employee=>!employee.phonenumber).map(employee=>employee.name);
-console.log(`Những nhân viên không có số điện thoại là: ${updatedEmployess}`);
+const phoneChecked = employess.filter(employee=>!employee.phonenumber).map(employee=>employee.name);
+const emailchecked = employess.filter(employee=>!employee.email).map(employee=>employee.name);
+const allChecked =employess.filter(employee=>!employee.phonenumber && !employee.email).map(employee=>employee.name);
+console.log(`Những nhân viên không có số điện thoại là: ${phoneChecked.join(", ") }`);
+console.log(`Những nhân viên không có email là: ${emailchecked.join(", ") }`);
+console.log(`Những nhân viên không có số điện thoại và email là: ${allChecked.join(", ") }`);
