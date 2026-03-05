@@ -187,10 +187,11 @@ const updateEmail = employee.map((emp) => {
     emp.email === null ? emp.email = `${emp.id}@company.com` : emp.email;
     return emp;
 });
-const totalSalary = employee.reduce((total,emp) => total + emp.salary, 0);
+const totalSalary = employee.reduce((total,emp) => total + emp.salary, 0).toLocaleString();
 console.log(`Những nhân viên không có số điện thoại là: ${phoneChecker.join(", ") }`);
 console.log(`Những nhân viên không có email là: ${emailChecker.join(", ") }`);
 console.log(`Những nhân viên không có số điện thoại và email là: ${allchecker.join(", ") }`);
 console.log(`Cập nhật data:`);
 updateEmail.forEach((emp) => console.log(`- ${emp.name}: ${emp.email}`));
+
 console.log(`Tổng Lương của tháng: ${totalSalary}VND`);
