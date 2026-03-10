@@ -9,7 +9,8 @@
         console.log("2.in ra list");
         console.log("3.tim kiem ten");
         console.log("4.sua thong tin");
-        console.log("5.exit");
+        console.log("5.tim tuong doi")
+        console.log("6.exit");
         choice = prompt("nhap lua chon : ");
         switch( choice){
         case "1" : 
@@ -51,10 +52,10 @@
         console.log({...emp, salary : emp.salary.toLocaleString()})});
         break;
         case "3":
-        let search = prompt("nhap ten can tim :");
+        let search = prompt("nhap day du ho ten can tim :");
         let result= employees.filter((emp) =>
-                emp.name.toLowerCase === search.toLowerCase
-            )
+                emp.name.toLowerCase() === search.toLowerCase()
+            );
             result.forEach((emp) => 
             console.log(emp));
         break;
@@ -93,7 +94,17 @@
                 console.log(" khong tim thay");
             }
         break;
-        case "5" : 
+        case "5":
+            let includesSearchName = prompt("Nhap chu cai can tim :");
+            
+            for( let i =0; i < employees.length ; i++){
+                let kq = employees[i].name.toLowerCase().includes(includesSearchName.toLowerCase());
+                if(kq){
+                    console.log(employees[i]);
+                }
+            }
+        break;
+        case "6" : 
         console.log("thoat....");
         break;
         default:
@@ -101,4 +112,4 @@
     }
 
     }
-    while( choice!== "5");
+    while( choice!== "6");
