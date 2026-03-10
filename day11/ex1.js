@@ -45,7 +45,14 @@ const employees = [
     salary: 3500,
   },
 ];
-employees
-.filter((emp) => emp.email||emp.phoneNumber)
-.forEach((emp)=> console.log(emp));
+let result = employees.filter((emp) => emp.email || emp.phoneNumber )
+console.log("cac nhan vien hop le la : " , result);
+result.map( (emp) => {
+    if(!emp.email) {
+        emp.email = emp.id + emp.position +"@company.com"
+    }
+    return emp;
+}).forEach((emp) => console.log("sau update:" , emp));
+
+
 
