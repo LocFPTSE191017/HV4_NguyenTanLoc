@@ -47,12 +47,9 @@ const employees = [
 ];
 let result = employees.filter((emp) => emp.email || emp.phoneNumber )
 console.log("cac nhan vien hop le la : " , result);
-result.map( (emp) => {
-    if(!emp.email) {
-        emp.email = emp.id+"_" + emp.position.toLowerCase() +"@company.com"
-    }
-    return emp;
-}).forEach((emp) => console.log("sau update:" , emp));
-
+let update = result.map( (emp) => {
+return emp.email ? emp : {...emp, email : `${emp.id}_${emp.position.toLowerCase()}@companygmail.com`};
+}) ;
+console.log(update);
 
 
