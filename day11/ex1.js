@@ -45,5 +45,7 @@ const employees = [
     salary: 3500,
   },
 ];
-let result = employees.filter((emp) => emp.email || emp.phoneNumber )
-console.log("cac nhan vien hop le la : " , result);
+employees
+.filter((emp) => emp.email||emp.phoneNumber)
+.forEach((emp)=> console.log(emp));
+
