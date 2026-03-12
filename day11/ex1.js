@@ -52,4 +52,12 @@ return emp.email ? emp : {...emp, email : `${emp.id}_${emp.position.toLowerCase(
 }) ;
 console.log(update);
 
+let sum = employees.reduce((total,emp) => {
+    return ( (total+emp)/employees.length)
+},0 );
+employees.filter((emp) => emp.salary > sum 
+).forEach((emp) => console.log(`cac NV co muc luong lon hon TB : ${emp}`));
+employees.filter((emp) => emp.salary < sum 
+).forEach((emp) => console.log(`cac NV co muc luong nho hon TB : ${emp}`));
+
 
