@@ -1,0 +1,174 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*, java.util.*" %>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Cafe Cây Dừa</title>
+    <link rel="stylesheet" href="Style.css">
+    <style>
+        .profile-container {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 40px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .profile-container h2 {
+            text-align: center;
+            color: #8B4513;
+        }
+        .profile-info {
+            margin-bottom: 30px;
+        }
+        .profile-info p {
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .orders-table th, .orders-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .profile-info form {
+            margin-top: 20px;
+        }
+        .profile-info label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .profile-info input, .profile-info textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .profile-info textarea {
+            height: 60px;
+        }
+        .profile-info button {
+            background-color: #8B4513;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .profile-info button:hover {
+            background-color: #A0522D;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <h2>Thông Tin Tài Khoản</h2>
+        <%
+            String username = (String) session.getAttribute("username");
+            if (username == null) {
+                response.sendRedirect("Login.html");
+                return;
+            }
+            // Kết nối DB để lấy thông tin user và orders
+            Connection conn = null;
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            int userId = 0;
+            String role = "";
+            String phone = "";
+            String address = "";
+            List<Map<String, Object>> orders = new ArrayList<>();
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cafe_cay_dua?useSSL=false&serverTimezone=UTC", "root", "your_password_here");
+
+                // Lấy user info
+                stmt = conn.prepareStatement("SELECT id, role, phone, address FROM users WHERE username = ?");
+                stmt.setString(1, username);
+                rs = stmt.executeQuery();
+                if (rs.next()) {
+                    userId = rs.getInt("id");
+                    role = rs.getString("role");
+                    phone = rs.getString("phone") != null ? rs.getString("phone") : "";
+                    address = rs.getString("address") != null ? rs.getString("address") : "";
+                }
+                rs.close();
+                stmt.close();
+
+                // Lấy orders
+                stmt = conn.prepareStatement("SELECT product_name, quantity, price, total, order_date FROM orders WHERE user_id = ? ORDER BY order_date DESC");
+                stmt.setInt(1, userId);
+                rs = stmt.executeQuery();
+                while (rs.next()) {
+                    Map<String, Object> order = new HashMap<>();
+                    order.put("product_name", rs.getString("product_name"));
+                    order.put("quantity", rs.getInt("quantity"));
+                    order.put("price", rs.getDouble("price"));
+                    order.put("total", rs.getDouble("total"));
+                    order.put("order_date", rs.getTimestamp("order_date"));
+                    orders.add(order);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            }
+        %>
+        <div class="profile-info">
+            <p><strong>Tên đăng nhập:</strong> <%= username %></p>
+            <p><strong>Vai trò:</strong> <%= role %></p>
+            <form action="updateProfile" method="post">
+                <label>SĐT: <input type="tel" name="phone" value="<%= phone %>" required></label><br>
+                <label>Địa chỉ: <textarea name="address" required><%= address %></textarea></label><br>
+                <button type="submit">Cập Nhật</button>
+            </form>
+            <% String update = request.getParameter("update");
+               String error = request.getParameter("error");
+               if ("1".equals(update)) { %>
+                <p style="color: green;">Cập nhật thành công!</p>
+            <% } else if ("1".equals(error)) { %>
+                <p style="color: red;">Lỗi cập nhật!</p>
+            <% } %>
+        </div>
+        <h3>Lịch Sử Đặt Hàng</h3>
+        <% if (orders.isEmpty()) { %>
+            <p>Bạn chưa có đơn hàng nào.</p>
+        <% } else { %>
+            <table class="orders-table">
+                <thead>
+                    <tr>
+                        <th>Sản Phẩm</th>
+                        <th>Số Lượng</th>
+                        <th>Giá</th>
+                        <th>Tổng</th>
+                        <th>Ngày Đặt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (Map<String, Object> order : orders) { %>
+                        <tr>
+                            <td><%= order.get("product_name") %></td>
+                            <td><%= order.get("quantity") %></td>
+                            <td><%= order.get("price") %> VND</td>
+                            <td><%= order.get("total") %> VND</td>
+                            <td><%= order.get("order_date") %></td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        <% } %>
+        <p><a href="Cafe_manager.html">Quay lại Trang Chủ</a></p>
+    </div>
+</body>
+</html>

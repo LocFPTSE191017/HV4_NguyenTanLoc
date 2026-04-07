@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký - Cafe Cây Dừa</title>
+    <link rel="stylesheet" href="Style.css">
+    <style>
+        .register-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 40px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .register-container img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+        }
+        .register-container h2 {
+            margin-bottom: 30px;
+            color: #8B4513;
+        }
+        .register-container input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        .register-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #8B4513;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+        .register-container button:hover {
+            background-color: #A0522D;
+        }
+        .register-container p {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .register-container a {
+            color: #8B4513;
+            text-decoration: none;
+        }
+        .register-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <img src="logo.svg" alt="Logo Cafe Cây Dừa">
+        <h2>Đăng Ký Tài Khoản</h2>
+        <form id="registerForm" action="register" method="post">
+            <input type="text" name="username" placeholder="Tên đăng nhập" required>
+            <input type="password" name="password" placeholder="Mật khẩu" required>
+            <input type="password" name="confirmPassword" placeholder="Xác nhận mật khẩu" required>
+            <input type="tel" name="phone" placeholder="Số điện thoại" required>
+            <input type="text" name="address" placeholder="Địa chỉ" required>
+            <button type="submit">Đăng Ký</button>
+        </form>
+        <p>Đã có tài khoản? <a href="Login.html">Đăng nhập</a></p>
+    </div>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('Mật khẩu xác nhận không khớp!');
+                return;
+            }
+
+            // Giả lập đăng ký thành công (trong thực tế gửi đến server)
+            alert('Đăng ký thành công! Vui lòng đăng nhập.');
+            window.location.href = 'Login.html';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập - Cafe Cây Dừa</title>
+    <link rel="stylesheet" href="Style.css">
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 40px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .login-container img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+        }
+        .login-container h2 {
+            margin-bottom: 30px;
+            color: #8B4513;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #8B4513;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+        .login-container button:hover {
+            background-color: #A0522D;
+        }
+        .login-container p {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <img src="logo.svg" alt="Logo Cafe Cây Dừa">
+        <h2>Đăng Nhập</h2>
+        <form id="loginForm" action="login" method="post">
+            <input type="text" id="username" placeholder="Tên đăng nhập" required>
+            <input type="password" id="password" placeholder="Mật khẩu" required>
+            <button type="submit">Đăng Nhập</button>
+        </form>
+        <% String error = request.getParameter("error");
+           String success = request.getParameter("success");
+           if ("1".equals(error)) { %>
+            <p style="color: red;">Tên đăng nhập hoặc mật khẩu không đúng!</p>
+        <% } else if ("2".equals(error)) { %>
+            <p style="color: red;">Lỗi kết nối database!</p>
+        <% } else if ("1".equals(success)) { %>
+            <p style="color: green;">Đăng ký thành công! Vui lòng đăng nhập.</p>
+        <% } %>
+    </div>
+</body>
+</html>
