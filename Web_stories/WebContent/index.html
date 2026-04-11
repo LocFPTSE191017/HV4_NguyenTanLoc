@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Stories - Trang chủ</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header>
+        <h1>Web Stories</h1>
+        <nav>
+            <a href="login.html">Đăng nhập</a>
+            <a href="register.html">Đăng ký</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="story-list">
+            <h2>Danh sách truyện ngắn</h2>
+            <ul id="stories"></ul>
+        </section>
+
+        <section class="story-content">
+            <h2>Nội dung truyện</h2>
+            <div id="message" class="message">Hãy click vào tiêu đề để xem nội dung. Bạn phải đăng nhập để xem truyện.</div>
+            <article id="storyText"></article>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
