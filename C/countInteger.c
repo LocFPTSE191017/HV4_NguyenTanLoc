@@ -26,10 +26,8 @@ int CountNumberdi3(int n ){
 int main() {
     int n;
     int choice;
-    while(1){
     printf("Enter the number of elements: ");
     scanf("%d", &n); 
-    }
     do{
     printf("Menu:\n");
     printf("1. Calculate the sum of the first n natural numbers\n");
