@@ -13,7 +13,7 @@ int main(){
 	scanf("%f",&money);
 		printf(" nhap so tien ban muon doi sang tien do:\n");
 	scanf("%f",&vnd);
-	float dtb = (toan+ly+sinh+van)/5;
+	float dtb = (toan+ly+sinh+van)/4;
 	float usd = vnd / 260000;
 	int choice;
 	do{
