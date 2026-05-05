@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include<stdio.h>
 int main(void){
     int h ;
     printf("nhap chieu cao tam giac: ");
@@ -8,8 +8,8 @@ int main(void){
             printf(" ");
         }
         for(int k = 1 ; k <=(2*i-1);k++){
-            if( k ==1 || i ==h || k ==(2*i-1)){
-                printf("*");
+            if( k ==1 || k ==h || k ==(2*i-1)){
+                 printf("*");
             }else{
                 printf(" ");
             }
