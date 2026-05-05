@@ -3,9 +3,9 @@
 int main()
 {
     int n;
-    int max = 100;
-    int a[max];
-    for(int i = 0; i < 10; i++){
+
+    int a[100]={1,2,3};
+    for(int i = 3; i < 10; i++){
         printf("nhap phan tu thu %d: ", i+1);
         scanf("%d", &a[i]);
     }
