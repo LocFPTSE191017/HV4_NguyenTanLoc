@@ -21,10 +21,10 @@ void enterPoint(int n, float a[]) {
 		do {
 			printf("nhap diem sinh vien thu %d :",i+1);
 			scanf("%f",&a[i]);
-			if(a[i] < 0 ) {
-				printf("Diem khong hop le!");
+			if(a[i] < 0 || a[i] > 10 ) {
+				printf("Diem khong hop le!\nVui long nhap diem he so 10!\n");
 			}
-		} while(a[i]<0);
+		} while(a[i]<0 || a[i]>10);
 	}
 }
 
@@ -75,11 +75,23 @@ void numOfHighestP(float max, int n, float a[]) {
 
 //-----------------------------------------------------------------
 
-void bubbleSort(int n, float a[]) {
+void bubbleSortDecrease(int n, float a[]) {
 	for( int i = 0 ; i < n ; i++) {
 		for ( int k = 0 ; k< n -1 ; k++) {
 			float temp  = a[k];
 			if( a[k] < a[k+1]) {
+				a[k] = a[k+1];
+				a[k+1] = temp;
+			}
+		}
+	}
+}
+
+void bubbleSortIncrease(int n , float a[]){
+    for( int i = 0 ; i < n ; i++) {
+		for ( int k = 0 ; k< n -1 ; k++) {
+			float temp  = a[k];
+			if( a[k] > a[k+1]) {
 				a[k] = a[k+1];
 				a[k+1] = temp;
 			}
@@ -96,6 +108,42 @@ void disPlay(int n , float a[]){
 	}
 	printf("]");
 }
+
+//-----------------------------------------------------------------
+
+
+void sortArrayKeepPlace(int n , float a[]){
+    float b[100];
+    float c[100];
+    float d[100];
+    int nb = 0 , nc = 0 , nd = 0 ;
+    for( int i = 0 ; i < n ; i++){
+        if(a[i] < 5  ) {
+                b[nb++] = a[i];
+            
+        } else if( a[i] >= 5 && a[i] <= 8) {
+            
+                c[nc++] = a[i];
+            
+        } else {
+            
+                d[nd++] = a[i];
+            
+        }
+    }
+
+    for( int i = 0 ; i < nb ; i++){
+        printf("%.1f,",b[i]);
+    }
+    for( int i = 0 ; i < nc ; i++){
+        printf("%.1f,",c[i]);
+    }
+    for( int i = 0 ; i < nd ; i++){
+        printf("%.1f,",d[i]);
+    }
+    }
+
+
 
 //-----------------------------------------------------------------
 int main(void) {
@@ -115,7 +163,8 @@ int main(void) {
 		printf("4.Tim diem cao nhat lop va so luong sinh vien dat duoc muc diem do!\n");
 		printf("5.In diem theo thu tu!\n");
 		printf("6.In diem cao thu 2 va 3!\n");
-		printf("7.exit!");
+		printf("7.In sap xep diem theo rankStudent\n");
+		printf("8.exit!");
 		printf("\n");
 		printf("nhap lua chon cua ban:");
 		scanf("%d",&choice);
@@ -155,24 +204,52 @@ int main(void) {
 			printf("\n");
 			break;
 		case 5 :
-			bubbleSort(n,a);
-			disPlay(n,a);
-			printf("\n");
-			printf("\n");
-			break;
+		int subChoice;
+		do{
+		    printf("1.In theo thu tu tang dan!\n");
+		    printf("2.In theo thu tu giam dan!\n");
+		    printf("3.Out!\n");
+		    printf("nhap lua chon cua ban :");
+		    scanf("%d",&subChoice);
+		    switch(subChoice){
+		    case 1 :
+		           bubbleSortIncrease(n,a);
+			       disPlay(n,a);
+			       printf("\n");
+		 	       printf("\n");
+			       break;
+			case 2 :
+			       bubbleSortDecrease(n,a);
+			       disPlay(n,a);
+			       printf("\n");
+		 	       printf("\n");
+			       break;
+			case 3 :
+			       break;
+			 default :
+			       printf("lua chon cua ban khong hop le!");
+		}
+		  }while(subChoice!=3);
+		  break;
 		case 6 :
-		    bubbleSort(n,a);
+		    bubbleSortDecrease(n,a);
 		        printf("sinh vien co diem cao thu 2 la : %.2f", a[1]);
 		        printf("\n");
 		        printf("sinh vien co diem cao thu 3 la : %.2f", a[2]);
 		        printf("\n");
 			    printf("\n");
-		case 7 :
+			    break;
+	    case 7 :
+	            sortArrayKeepPlace(n,a);
+	            printf("\n");
+			    printf("\n");
+	            break;
+		case 8 :
 			printf("Xin hay doi!Chuong trinh dang tat.........");
 			break;
 		default :
 			printf("lua chon khong hop le!\n");
 		}
 
-	} while(choice!=7);
+	} while(choice!=8);
 }
