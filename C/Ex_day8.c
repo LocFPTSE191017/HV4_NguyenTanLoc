@@ -170,12 +170,18 @@ int main(void) {
 		scanf("%d",&choice);
 		printf("------------------------------------------------------\n");
 		while(isEmpty(n)&& choice !=1) {
+			if( choice == 8) {
+				printf("Xin hay doi!Chuong trinh dang tat.........");
+				break;
+			} else {
 			printf("\n");
 			printf("Ban can nhap thong tin truoc khi thuc hien cac chuc nang khac!\n");
 			printf("Vui long nhap lai lua chon cua ban:");
 			scanf("%d",&choice);
 			printf("-------------------------------------------------------------\n");
 		}
+	}
+			
 
 		switch(choice) {
 		case 1 :
